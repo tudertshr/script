@@ -1,0 +1,1588 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cours Complet d'Algorithmique et Programmation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Source+Code+Pro:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #7c3aed;
+            --accent: #10b981;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #94a3b8;
+            --code-bg: #0f172a;
+            --border: #e2e8f0;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --success: #10b981;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+        }
+        
+        /* Navigation */
+        header {
+            background-color: var(--dark);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .logo i {
+            color: var(--accent);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Main Content */
+        main {
+            padding: 3rem 0;
+        }
+        
+        section {
+            margin-bottom: 4rem;
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--accent);
+            display: inline-block;
+        }
+        
+        h3 {
+            color: var(--secondary);
+            margin: 1.5rem 0 1rem;
+        }
+        
+        h4 {
+            color: var(--dark);
+            margin: 1rem 0 0.5rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Code Blocks */
+        .code-container {
+            background-color: var(--code-bg);
+            border-radius: 6px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            position: relative;
+        }
+        
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: var(--gray);
+        }
+        
+        .language-tag {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+        
+        .copy-btn {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--gray);
+            border: none;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: background-color 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        pre {
+            color: #e2e8f0;
+            font-family: 'Source Code Pro', monospace;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            white-space: pre-wrap;
+        }
+        
+        .code-keyword {
+            color: #ff79c6;
+        }
+        
+        .code-function {
+            color: #50fa7b;
+        }
+        
+        .code-string {
+            color: #f1fa8c;
+        }
+        
+        .code-comment {
+            color: #6272a4;
+        }
+        
+        .code-number {
+            color: #bd93f9;
+        }
+        
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border: 1px solid var(--border);
+        }
+        
+        th {
+            background-color: #f1f5f9;
+            font-weight: 600;
+        }
+        
+        /* Exercise Blocks */
+        .exercise {
+            background-color: #f8fafc;
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .exercise-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        
+        .exercise-title {
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .exercise-number {
+            background-color: var(--accent);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .solution-toggle {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+            margin-top: 1rem;
+        }
+        
+        .solution-toggle:hover {
+            background-color: #1d4ed8;
+        }
+        
+        .solution {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+            display: none;
+        }
+        
+        .solution.show {
+            display: block;
+        }
+        
+        /* Tabs */
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 1.5rem;
+        }
+        
+        .tab {
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .tab.active {
+            border-bottom: 3px solid var(--primary);
+            color: var(--primary);
+            font-weight: 500;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Info Boxes */
+        .info-box {
+            background-color: #dbeafe;
+            border-left: 4px solid var(--primary);
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .warning-box {
+            background-color: #fef3c7;
+            border-left: 4px solid var(--warning);
+        }
+        
+        .danger-box {
+            background-color: #fee2e2;
+            border-left: 4px solid var(--danger);
+        }
+        
+        .success-box {
+            background-color: #d1fae5;
+            border-left: 4px solid var(--success);
+        }
+        
+        /* Interactive Code Runner */
+        .code-runner {
+            background-color: var(--code-bg);
+            border-radius: 6px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .runner-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: var(--gray);
+        }
+        
+        .run-btn {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .run-btn:hover {
+            background-color: #0da271;
+        }
+        
+        .code-input {
+            width: 100%;
+            background-color: #0a0e17;
+            color: #e2e8f0;
+            border: 1px solid #334155;
+            border-radius: 4px;
+            padding: 1rem;
+            font-family: 'Source Code Pro', monospace;
+            font-size: 0.95rem;
+            min-height: 150px;
+            margin-bottom: 1rem;
+            resize: vertical;
+        }
+        
+        .output {
+            background-color: #0a0e17;
+            color: #e2e8f0;
+            border: 1px solid #334155;
+            border-radius: 4px;
+            padding: 1rem;
+            min-height: 100px;
+            font-family: 'Source Code Pro', monospace;
+            white-space: pre-wrap;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 2rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-section h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #334155;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                position: absolute;
+                right: 1rem;
+                top: 1rem;
+            }
+            
+            .mobile-nav {
+                display: none;
+                width: 100%;
+                margin-top: 1rem;
+            }
+            
+            .mobile-nav.show {
+                display: block;
+            }
+            
+            .mobile-nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .mobile-nav a {
+                display: block;
+                padding: 0.75rem;
+                background-color: rgba(255, 255, 255, 0.05);
+            }
+            
+            .footer-content {
+                flex-direction: column;
+            }
+        }
+        
+        /* Print Styles */
+        @media print {
+            header, footer, .cta-button, .solution-toggle, .run-btn, .copy-btn {
+                display: none;
+            }
+            
+            .solution {
+                display: block !important;
+            }
+            
+            .code-container {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header avec navigation -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-code"></i>
+                <span>Algorithmique & Programmation</span>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav class="mobile-nav" id="mobileNav">
+                <ul>
+                    <li><a href="#theorie">Théorie</a></li>
+                    <li><a href="#exercices-fondamentaux">Exercices Fondamentaux</a></li>
+                    <li><a href="#tableaux">Tableaux</a></li>
+                    <li><a href="#matrices">Matrices</a></li>
+                    <li><a href="#chaines">Chaînes</a></li>
+                    <li><a href="#fonctions">Fonctions</a></li>
+                    <li><a href="#algorithmes">Algorithmes Avancés</a></li>
+                </ul>
+            </nav>
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="#theorie">Théorie</a></li>
+                    <li><a href="#exercices-fondamentaux">Exercices</a></li>
+                    <li><a href="#tableaux">Tableaux</a></li>
+                    <li><a href="#matrices">Matrices</a></li>
+                    <li><a href="#chaines">Chaînes</a></li>
+                    <li><a href="#fonctions">Fonctions</a></li>
+                    <li><a href="#algorithmes">Algorithmes</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Section Hero -->
+    <section class="hero">
+        <div class="container">
+            <h1>Maîtrisez l'Algorithmique et la Programmation</h1>
+            <p>Un cours complet avec théorie détaillée, exercices pratiques, solutions commentées et exemples de code en Python. Parfait pour les débutants et les étudiants en informatique.</p>
+            <a href="#theorie" class="cta-button">Commencer l'apprentissage</a>
+        </div>
+    </section>
+
+    <!-- Contenu principal -->
+    <main class="container">
+        <!-- Section Théorie -->
+        <section id="theorie">
+            <h2><i class="fas fa-book"></i> Partie Théorique</h2>
+            
+            <div class="tabs">
+                <div class="tab active" data-tab="intro">Introduction</div>
+                <div class="tab" data-tab="langages">Langages</div>
+                <div class="tab" data-tab="donnees">Types de données</div>
+                <div class="tab" data-tab="controle">Structures de contrôle</div>
+                <div class="tab" data-tab="structures">Structures de données</div>
+                <div class="tab" data-tab="bonnes-pratiques">Bonnes pratiques</div>
+            </div>
+            
+            <div class="tab-content active" id="intro-content">
+                <h3>1.1 Introduction à l'Algorithmique</h3>
+                <p><strong>Algorithme</strong> : Suite finie et ordonnée d'instructions permettant de résoudre un problème spécifique.</p>
+                
+                <h4>Caractéristiques d'un bon algorithme :</h4>
+                <ul>
+                    <li><strong>Précis</strong> : Instructions non ambiguës</li>
+                    <li><strong>Fini</strong> : S'arrête après un nombre fini d'étapes</li>
+                    <li><strong>Efficace</strong> : Utilise optimalement les ressources</li>
+                    <li><strong>Compréhensible</strong> : Facile à comprendre et modifier</li>
+                </ul>
+                
+                <div class="info-box">
+                    <p><strong>Différence Algorithme/Programme :</strong></p>
+                    <ul>
+                        <li><strong>Algorithme</strong> : Solution conceptuelle, indépendante du langage</li>
+                        <li><strong>Programme</strong> : Implémentation concrète dans un langage spécifique</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="langages-content">
+                <h3>1.2 Concepts des Langages de Programmation</h3>
+                
+                <h4>Langages Compilés vs Interprétés :</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Exemples</th>
+                            <th>Processus</th>
+                            <th>Avantages</th>
+                            <th>Inconvénients</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Compilé</strong></td>
+                            <td>C, C++, Java</td>
+                            <td>Code source → Compilateur → Code machine (exécutable)</td>
+                            <td>Rapide à l'exécution</td>
+                            <td>Dépendant de la plateforme</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Interprété</strong></td>
+                            <td>Python, JavaScript, PHP</td>
+                            <td>Code source → Interpréteur → Exécution ligne par ligne</td>
+                            <td>Portable, facile à déboguer</td>
+                            <td>Plus lent à l'exécution</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h4>Éléments d'un langage :</h4>
+                <ul>
+                    <li><strong>Lexique</strong> : Ensemble des mots-clés, identificateurs, opérateurs</li>
+                    <li><strong>Syntaxe</strong> : Règles de composition des instructions</li>
+                    <li><strong>Sémantique</strong> : Signification des constructions syntaxiques</li>
+                </ul>
+                
+                <div class="warning-box">
+                    <p><strong>Types d'erreurs :</strong></p>
+                    <ol>
+                        <li><strong>Erreurs de syntaxe</strong> : Violation des règles grammaticales (détectées par le compilateur/interpréteur)</li>
+                        <li><strong>Erreurs sémantiques</strong> : Instructions syntaxiquement correctes mais logiquement fausses</li>
+                        <li><strong>Erreurs d'exécution</strong> : Problèmes pendant l'exécution (division par zéro, dépassement mémoire)</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="donnees-content">
+                <h3>1.3 Types de Données et Variables</h3>
+                
+                <h4>Types de base :</h4>
+                <ul>
+                    <li><strong>Entier (int)</strong> : Nombres sans virgule</li>
+                    <li><strong>Réel (float)</strong> : Nombres avec virgule</li>
+                    <li><strong>Chaîne (string)</strong> : Suite de caractères</li>
+                    <li><strong>Booléen (bool)</strong> : Vrai/Faux</li>
+                </ul>
+                
+                <h4>Déclaration et affectation :</h4>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span class="language-tag">Python</span>
+                        <button class="copy-btn">Copier</button>
+                    </div>
+                    <pre><code><span class="code-comment"># Python (typage dynamique)</span>
+<span class="code-keyword">nom_variable</span> = <span class="code-string">valeur</span></code></pre>
+                </div>
+                
+                <div class="code-container">
+                    <div class="code-header">
+                        <span class="language-tag">C</span>
+                        <button class="copy-btn">Copier</button>
+                    </div>
+                    <pre><code><span class="code-comment">// C (typage statique)</span>
+<span class="code-keyword">type</span> nom_variable;</code></pre>
+                </div>
+                
+                <h4>Opérateurs :</h4>
+                <ul>
+                    <li><strong>Arithmétiques</strong> : <code>+ - * / %</code></li>
+                    <li><strong>Comparaison</strong> : <code>== != < > <= >=</code></li>
+                    <li><strong>Logiques</strong> : <code>and or not</code> (Python), <code>&& || !</code> (C)</li>
+                </ul>
+            </div>
+            
+            <div class="tab-content" id="controle-content">
+                <h3>1.4 Structures de Contrôle</h3>
+                
+                <h4>Structure conditionnelle :</h4>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span class="language-tag">Python</span>
+                        <button class="copy-btn">Copier</button>
+                    </div>
+                    <pre><code><span class="code-keyword">if</span> condition:
+    <span class="code-comment"># instructions si vrai</span>
+<span class="code-keyword">elif</span> autre_condition:
+    <span class="code-comment"># instructions</span>
+<span class="code-keyword">else</span>:
+    <span class="code-comment"># instructions si faux</span></code></pre>
+                </div>
+                
+                <h4>Structures répétitives :</h4>
+                
+                <p><strong>Boucle <code>while</code></strong> (tant que) :</p>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span class="language-tag">Python</span>
+                        <button class="copy-btn">Copier</button>
+                    </div>
+                    <pre><code><span class="code-keyword">while</span> condition:
+    <span class="code-comment"># instructions répétées</span></code></pre>
+                </div>
+                
+                <p><strong>Boucle <code>for</code></strong> (pour) :</p>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span class="language-tag">Python</span>
+                        <button class="copy-btn">Copier</button>
+                    </div>
+                    <pre><code><span class="code-keyword">for</span> i <span class="code-keyword">in</span> <span class="code-function">range</span>(début, fin, pas):
+    <span class="code-comment"># instructions répétées</span></code></pre>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="structures-content">
+                <h3>1.5 Structures de Données Complexes</h3>
+                
+                <h4>Tableaux (Vecteurs) :</h4>
+                <ul>
+                    <li>Collection d'éléments de même type</li>
+                    <li>Accès par indice (commençant à 0 en Python/C, à 1 en algorithmique)</li>
+                    <li>Taille fixe ou dynamique selon le langage</li>
+                </ul>
+                
+                <h4>Déclaration :</h4>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span class="language-tag">Algorithmique</span>
+                        <button class="copy-btn">Copier</button>
+                    </div>
+                    <pre><code>Tableau T[1..N] d'entiers</code></pre>
+                </div>
+                
+                <div class="code-container">
+                    <div class="code-header">
+                        <span class="language-tag">Python</span>
+                        <button class="copy-btn">Copier</button>
+                    </div>
+                    <pre><code>T = [<span class="code-number">0</span>] * N  <span class="code-comment"># Tableau de N zéros</span></code></pre>
+                </div>
+                
+                <div class="code-container">
+                    <div class="code-header">
+                        <span class="language-tag">C</span>
+                        <button class="copy-btn">Copier</button>
+                    </div>
+                    <pre><code><span class="code-keyword">int</span> T[N];  <span class="code-comment">// Tableau de N entiers</span></code></pre>
+                </div>
+                
+                <h4>Matrices (Tableaux bidimensionnels) :</h4>
+                <ul>
+                    <li>Tableau de tableaux</li>
+                    <li>Accès par deux indices : <code>M[i][j]</code> (ligne i, colonne j)</li>
+                </ul>
+                
+                <h4>Chaînes de caractères :</h4>
+                <ul>
+                    <li>Tableau de caractères terminé par <code>\0</code> en C</li>
+                    <li>Type dédié en Python avec méthodes intégrées</li>
+                </ul>
+            </div>
+            
+            <div class="tab-content" id="bonnes-pratiques-content">
+                <h3>1.7 Bonnes Pratiques et Conseils</h3>
+                
+                <h4>Bonnes Pratiques :</h4>
+                <ol>
+                    <li><strong>Indentation</strong> : Cruciale en Python (4 espaces par niveau)</li>
+                    <li><strong>Nommage</strong> : Variables explicites (<code>somme</code> plutôt que <code>s</code>)</li>
+                    <li><strong>Commentaires</strong> : Expliquer le "pourquoi" pas le "comment"</li>
+                    <li><strong>Modularité</strong> : Décomposer en petites fonctions</li>
+                    <li><strong>Tests</strong> : Vérifier avec des cas simples d'abord</li>
+                </ol>
+                
+                <div class="danger-box">
+                    <p><strong>Erreurs Courantes :</strong></p>
+                    <ul>
+                        <li><strong>Oubli des deux-points</strong> après <code>if</code>, <code>for</code>, <code>while</code>, <code>def</code></li>
+                        <li><strong>Confusion = et ==</strong> : <code>=</code> pour l'affectation, <code>==</code> pour la comparaison</li>
+                        <li><strong>Indices hors limites</strong> dans les tableaux</li>
+                        <li><strong>Boucles infinies</strong> : Condition de sortie manquante</li>
+                        <li><strong>Division par zéro</strong> : Toujours vérifier le dénominateur</li>
+                    </ul>
+                </div>
+                
+                <div class="success-box">
+                    <p><strong>Conseils pour les Examens :</strong></p>
+                    <ol>
+                        <li>Lisez attentivement l'énoncé</li>
+                        <li>Identifiez les entrées/sorties</li>
+                        <li>Décomposez le problème en sous-problèmes</li>
+                        <li>Testez avec des valeurs simples</li>
+                        <li>Vérifiez les cas limites</li>
+                        <li>Commentez votre raisonnement</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Exercices Fondamentaux -->
+        <section id="exercices-fondamentaux">
+            <h2><i class="fas fa-dumbbell"></i> Exercices Fondamentaux</h2>
+            
+            <!-- Exercice 1 -->
+            <div class="exercise">
+                <div class="exercise-header">
+                    <div class="exercise-title">Exercice 1 : Saisie et affichage</div>
+                    <div class="exercise-number">Ex 1</div>
+                </div>
+                <p><strong>Énoncé :</strong> Demander le prénom et afficher un message de bienvenue.</p>
+                
+                <div class="info-box">
+                    <p><strong>Idée clé :</strong> Fonction <code>input()</code> pour la saisie, <code>print()</code> pour l'affichage.</p>
+                </div>
+                
+                <button class="solution-toggle">Afficher la solution</button>
+                
+                <div class="solution">
+                    <h4>Solution Python :</h4>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span class="language-tag">Python</span>
+                            <button class="copy-btn">Copier</button>
+                        </div>
+                        <pre><code><span class="code-comment"># Demander le prénom à l'utilisateur</span>
+prenom = <span class="code-function">input</span>(<span class="code-string">"Entrez votre prénom : "</span>)
+
+<span class="code-comment"># Afficher le message de bienvenue</span>
+<span class="code-function">print</span>(<span class="code-string">f"Bonjour {prenom}, bienvenue dans Python !"</span>)</code></pre>
+                    </div>
+                    
+                    <div class="code-runner">
+                        <div class="runner-header">
+                            <span>Testez le code :</span>
+                            <button class="run-btn" onclick="runCode('ex1')">Exécuter</button>
+                        </div>
+                        <textarea class="code-input" id="ex1-input"># Testez le code ici
+prenom = input("Entrez votre prénom : ")
+print(f"Bonjour {prenom}, bienvenue dans Python !")</textarea>
+                        <div class="output" id="ex1-output">Le résultat s'affichera ici...</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Exercice 2 -->
+            <div class="exercise">
+                <div class="exercise-header">
+                    <div class="exercise-title">Exercice 2 : Opérations arithmétiques</div>
+                    <div class="exercise-number">Ex 2</div>
+                </div>
+                <p><strong>Énoncé :</strong> Demander deux nombres et afficher leur somme, différence et produit.</p>
+                
+                <div class="info-box">
+                    <p><strong>Idée clé :</strong> Gestion du cas de division par zéro.</p>
+                </div>
+                
+                <button class="solution-toggle">Afficher la solution</button>
+                
+                <div class="solution">
+                    <h4>Solution Python :</h4>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span class="language-tag">Python</span>
+                            <button class="copy-btn">Copier</button>
+                        </div>
+                        <pre><code><span class="code-comment"># Saisie des deux nombres</span>
+a = <span class="code-function">float</span>(<span class="code-function">input</span>(<span class="code-string">"Premier nombre : "</span>))
+b = <span class="code-function">float</span>(<span class="code-function">input</span>(<span class="code-string">"Deuxième nombre : "</span>))
+
+<span class="code-comment"># Calculs et affichages</span>
+<span class="code-function">print</span>(<span class="code-string">f"Somme : {a + b}"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"Différence : {a - b}"</span>)
+<span class="code-function">print</span>(<span class="code-string">f"Produit : {a * b}"</span>)
+
+<span class="code-keyword">if</span> b != <span class="code-number">0</span>:
+    <span class="code-function">print</span>(<span class="code-string">f"Quotient : {a / b}"</span>)
+<span class="code-keyword">else</span>:
+    <span class="code-function">print</span>(<span class="code-string">"Division par zéro impossible"</span>)</code></pre>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Exercice 3 -->
+            <div class="exercise">
+                <div class="exercise-header">
+                    <div class="exercise-title">Exercice 3 : Calcul d'aire</div>
+                    <div class="exercise-number">Ex 3</div>
+                </div>
+                <p><strong>Énoncé :</strong> Calculer l'aire d'un rectangle.</p>
+                
+                <button class="solution-toggle">Afficher la solution</button>
+                
+                <div class="solution">
+                    <h4>Solution Python :</h4>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span class="language-tag">Python</span>
+                            <button class="copy-btn">Copier</button>
+                        </div>
+                        <pre><code>longueur = <span class="code-function">float</span>(<span class="code-function">input</span>(<span class="code-string">"Longueur : "</span>))
+largeur = <span class="code-function">float</span>(<span class="code-function">input</span>(<span class="code-string">"Largeur : "</span>))
+aire = longueur * largeur
+<span class="code-function">print</span>(<span class="code-string">f"Aire du rectangle : {aire}"</span>)</code></pre>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Exercice 4 à 11 seraient ajoutés ici de manière similaire -->
+            
+        </section>
+
+        <!-- Section Tableaux -->
+        <section id="tableaux">
+            <h2><i class="fas fa-list"></i> Exercices sur les Tableaux</h2>
+            
+            <!-- Exercice Tableaux 1 -->
+            <div class="exercise">
+                <div class="exercise-header">
+                    <div class="exercise-title">Exercice 1 : Lecture et affichage d'un tableau</div>
+                    <div class="exercise-number">Tableaux Ex 1</div>
+                </div>
+                <p><strong>Énoncé :</strong> Écrire un algorithme qui lit les valeurs d'un tableau puis les affiche.</p>
+                
+                <button class="solution-toggle">Afficher la solution</button>
+                
+                <div class="solution">
+                    <h4>Solution Python :</h4>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span class="language-tag">Python</span>
+                            <button class="copy-btn">Copier</button>
+                        </div>
+                        <pre><code>N = <span class="code-function">int</span>(<span class="code-function">input</span>(<span class="code-string">"Nombre d'éléments : "</span>))
+T = [<span class="code-number">0</span>] * N
+
+<span class="code-keyword">for</span> i <span class="code-keyword">in</span> <span class="code-function">range</span>(N):
+    T[i] = <span class="code-function">int</span>(<span class="code-function">input</span>(<span class="code-string">f"T[{i}] : "</span>))
+
+<span class="code-function">print</span>(<span class="code-string">"Tableau :"</span>, T)</code></pre>
+                    </div>
+                    
+                    <h4>Version avec liste en compréhension :</h4>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span class="language-tag">Python</span>
+                            <button class="copy-btn">Copier</button>
+                        </div>
+                        <pre><code>T = [<span class="code-function">int</span>(<span class="code-function">input</span>(<span class="code-string">f"T[{i}] : "</span>)) <span class="code-keyword">for</span> i <span class="code-keyword">in</span> <span class="code-function">range</span>(N)]</code></pre>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Exercice Tableaux 2 -->
+            <div class="exercise">
+                <div class="exercise-header">
+                    <div class="exercise-title">Exercice 2 : Somme des éléments</div>
+                    <div class="exercise-number">Tableaux Ex 2</div>
+                </div>
+                <p><strong>Énoncé :</strong> Calculer la somme des éléments d'un tableau de N entiers.</p>
+                
+                <button class="solution-toggle">Afficher la solution</button>
+                
+                <div class="solution">
+                    <h4>Solution Python :</h4>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span class="language-tag">Python</span>
+                            <button class="copy-btn">Copier</button>
+                        </div>
+                        <pre><code>somme = <span class="code-number">0</span>
+<span class="code-keyword">for</span> element <span class="code-keyword">in</span> T:
+    somme += element
+
+<span class="code-function">print</span>(<span class="code-string">f"Somme : {somme}"</span>)</code></pre>
+                    </div>
+                    
+                    <h4>Version avec fonction sum :</h4>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span class="language-tag">Python</span>
+                            <button class="copy-btn">Copier</button>
+                        </div>
+                        <pre><code>somme = <span class="code-function">sum</span>(T)</code></pre>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Plus d'exercices sur les tableaux seraient ajoutés ici -->
+            
+        </section>
+
+        <!-- Section Matrices -->
+        <section id="matrices">
+            <h2><i class="fas fa-table"></i> Exercices sur les Matrices</h2>
+            
+            <!-- Exercice Matrices 1 -->
+            <div class="exercise">
+                <div class="exercise-header">
+                    <div class="exercise-title">Exercice 11 : Lecture et affichage d'une matrice</div>
+                    <div class="exercise-number">Matrices Ex 1</div>
+                </div>
+                <p><strong>Énoncé :</strong> Lire une matrice M de dimension N × M et afficher ses éléments.</p>
+                
+                <button class="solution-toggle">Afficher la solution</button>
+                
+                <div class="solution">
+                    <h4>Solution Python :</h4>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span class="language-tag">Python</span>
+                            <button class="copy-btn">Copier</button>
+                        </div>
+                        <pre><code>lignes = <span class="code-function">int</span>(<span class="code-function">input</span>(<span class="code-string">"Nombre de lignes : "</span>))
+colonnes = <span class="code-function">int</span>(<span class="code-function">input</span>(<span class="code-string">"Nombre de colonnes : "</span>))
+
+<span class="code-comment"># Initialisation de la matrice</span>
+M = [[<span class="code-number">0</span>] * colonnes <span class="code-keyword">for</span> _ <span class="code-keyword">in</span> <span class="code-function">range</span>(lignes)]
+
+<span class="code-comment"># Lecture des éléments</span>
+<span class="code-keyword">for</span> i <span class="code-keyword">in</span> <span class="code-function">range</span>(lignes):
+    <span class="code-keyword">for</span> j <span class="code-keyword">in</span> <span class="code-function">range</span>(colonnes):
+        M[i][j] = <span class="code-function">int</span>(<span class="code-function">input</span>(<span class="code-string">f"M[{i}][{j}] : "</span>))
+
+<span class="code-comment"># Affichage de la matrice</span>
+<span class="code-function">print</span>(<span class="code-string">"Matrice :"</span>)
+<span class="code-keyword">for</span> ligne <span class="code-keyword">in</span> M:
+    <span class="code-function">print</span>(ligne)</code></pre>
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+
+        <!-- Section Chaînes -->
+        <section id="chaines">
+            <h2><i class="fas fa-font"></i> Exercices sur les Chaînes de Caractères</h2>
+            
+            <!-- Exercice Chaînes 1 -->
+            <div class="exercise">
+                <div class="exercise-header">
+                    <div class="exercise-title">Exercice 1 : Compter voyelles, consonnes et espaces</div>
+                    <div class="exercise-number">Chaînes Ex 1</div>
+                </div>
+                <p><strong>Énoncé :</strong> Écrire un algorithme qui permet de calculer le nombre des voyelles, consonnes et les espaces dans une chaîne de caractères.</p>
+                
+                <button class="solution-toggle">Afficher la solution</button>
+                
+                <div class="solution">
+                    <h4>Solution Python :</h4>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span class="language-tag">Python</span>
+                            <button class="copy-btn">Copier</button>
+                        </div>
+                        <pre><code>chaine = <span class="code-function">input</span>(<span class="code-string">"Entrez une chaîne : "</span>)
+voyelles = <span class="code-string">"aeiouyAEIOUY"</span>
+
+nb_voyelles = <span class="code-number">0</span>
+nb_consonnes = <span class="code-number">0</span>
+nb_espaces = <span class="code-number">0</span>
+
+<span class="code-keyword">for</span> caractere <span class="code-keyword">in</span> chaine:
+    <span class="code-keyword">if</span> caractere <span class="code-keyword">in</span> voyelles:
+        nb_voyelles += <span class="code-number">1</span>
+    <span class="code-keyword">elif</span> caractere.<span class="code-function">isalpha</span>():
+        nb_consonnes += <span class="code-number">1</span>
+    <span class="code-keyword">elif</span> caractere == <span class="code-string">" "</span>:
+        nb_espaces += <span class="code-number">1</span>
+
+<span class="code-function">print</span>(<span class="code-string">f"Voyelles: {nb_voyelles}, Consonnes: {nb_consonnes}, Espaces: {nb_espaces}"</span>)</code></pre>
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+
+        <!-- Section Fonctions -->
+        <section id="fonctions">
+            <h2><i class="fas fa-cogs"></i> Exercices avec Fonctions</h2>
+            
+            <!-- Exercice Fonctions 1 -->
+            <div class="exercise">
+                <div class="exercise-header">
+                    <div class="exercise-title">Factorielle avec fonction</div>
+                    <div class="exercise-number">Fonctions Ex 1</div>
+                </div>
+                <p><strong>Énoncé :</strong> Écrire une fonction qui calcule la factorielle d'un nombre n.</p>
+                
+                <button class="solution-toggle">Afficher la solution</button>
+                
+                <div class="solution">
+                    <h4>Solution Python :</h4>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span class="language-tag">Python</span>
+                            <button class="copy-btn">Copier</button>
+                        </div>
+                        <pre><code><span class="code-keyword">def</span> <span class="code-function">factorielle</span>(n):
+    <span class="code-comment">"""Calcule la factorielle de n"""</span>
+    <span class="code-keyword">if</span> n == <span class="code-number">0</span>:
+        <span class="code-keyword">return</span> <span class="code-number">1</span>
+    
+    resultat = <span class="code-number">1</span>
+    <span class="code-keyword">for</span> i <span class="code-keyword">in</span> <span class="code-function">range</span>(<span class="code-number">1</span>, n + <span class="code-number">1</span>):
+        resultat *= i
+    
+    <span class="code-keyword">return</span> resultat
+
+<span class="code-comment"># Test de la fonction</span>
+n = <span class="code-function">int</span>(<span class="code-function">input</span>(<span class="code-string">"Nombre : "</span>))
+<span class="code-function">print</span>(<span class="code-string">f"{n}! = {factorielle(n)}"</span>)</code></pre>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Exercice Fonctions 2 -->
+            <div class="exercise">
+                <div class="exercise-header">
+                    <div class="exercise-title">Vérification nombre premier</div>
+                    <div class="exercise-number">Fonctions Ex 2</div>
+                </div>
+                <p><strong>Énoncé :</strong> Écrire une fonction qui vérifie si un nombre est premier.</p>
+                
+                <button class="solution-toggle">Afficher la solution</button>
+                
+                <div class="solution">
+                    <h4>Solution Python :</h4>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span class="language-tag">Python</span>
+                            <button class="copy-btn">Copier</button>
+                        </div>
+                        <pre><code><span class="code-keyword">def</span> <span class="code-function">est_premier</span>(n):
+    <span class="code-comment">"""Vérifie si n est un nombre premier"""</span>
+    <span class="code-keyword">if</span> n < <span class="code-number">2</span>:
+        <span class="code-keyword">return</span> <span class="code-keyword">False</span>
+    
+    <span class="code-keyword">for</span> i <span class="code-keyword">in</span> <span class="code-function">range</span>(<span class="code-number">2</span>, <span class="code-function">int</span>(n**<span class="code-number">0.5</span>) + <span class="code-number">1</span>):
+        <span class="code-keyword">if</span> n % i == <span class="code-number">0</span>:
+            <span class="code-keyword">return</span> <span class="code-keyword">False</span>
+    
+    <span class="code-keyword">return</span> <span class="code-keyword">True</span>
+
+<span class="code-comment"># Test de la fonction</span>
+nombre = <span class="code-function">int</span>(<span class="code-function">input</span>(<span class="code-string">"Nombre : "</span>))
+<span class="code-keyword">if</span> <span class="code-function">est_premier</span>(nombre):
+    <span class="code-function">print</span>(<span class="code-string">f"{nombre} est premier"</span>)
+<span class="code-keyword">else</span>:
+    <span class="code-function">print</span>(<span class="code-string">f"{nombre} n'est pas premier"</span>)</code></pre>
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+
+        <!-- Section Algorithmes Avancés -->
+        <section id="algorithmes">
+            <h2><i class="fas fa-brain"></i> Algorithmes Avancés</h2>
+            
+            <!-- Algorithme 1 -->
+            <div class="exercise">
+                <div class="exercise-header">
+                    <div class="exercise-title">Tri par bulles</div>
+                    <div class="exercise-number">Algo 1</div>
+                </div>
+                <p><strong>Principe :</strong> Balayer tout le tableau, en comparant les éléments adjacents et les échangeant s'ils ne sont pas dans le bon ordre.</p>
+                
+                <button class="solution-toggle">Afficher la solution</button>
+                
+                <div class="solution">
+                    <h4>Solution Python :</h4>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span class="language-tag">Python</span>
+                            <button class="copy-btn">Copier</button>
+                        </div>
+                        <pre><code><span class="code-keyword">def</span> <span class="code-function">tri_bulles</span>(tableau):
+    <span class="code-comment">"""Trie un tableau par la méthode des bulles"""</span>
+    n = <span class="code-function">len</span>(tableau)
+    
+    <span class="code-keyword">for</span> i <span class="code-keyword">in</span> <span class="code-function">range</span>(n - <span class="code-number">1</span>):
+        <span class="code-keyword">for</span> j <span class="code-keyword">in</span> <span class="code-function">range</span>(n - <span class="code-number">1</span> - i):
+            <span class="code-keyword">if</span> tableau[j] > tableau[j + <span class="code-number">1</span>]:
+                <span class="code-comment"># Échange des éléments</span>
+                tableau[j], tableau[j + <span class="code-number">1</span>] = tableau[j + <span class="code-number">1</span>], tableau[j]
+    
+    <span class="code-keyword">return</span> tableau
+
+<span class="code-comment"># Test de l'algorithme</span>
+T = [<span class="code-number">5</span>, <span class="code-number">2</span>, <span class="code-number">8</span>, <span class="code-number">1</span>, <span class="code-number">9</span>, <span class="code-number">3</span>]
+<span class="code-function">print</span>(<span class="code-string">"Avant tri :"</span>, T)
+<span class="code-function">print</span>(<span class="code-string">"Après tri :"</span>, <span class="code-function">tri_bulles</span>(T.<span class="code-function">copy</span>()))</code></pre>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Algorithme 2 -->
+            <div class="exercise">
+                <div class="exercise-header">
+                    <div class="exercise-title">Recherche dichotomique</div>
+                    <div class="exercise-number">Algo 2</div>
+                </div>
+                <p><strong>Principe :</strong> Recherche efficace dans un tableau trié en divisant l'espace de recherche par deux à chaque étape.</p>
+                
+                <button class="solution-toggle">Afficher la solution</button>
+                
+                <div class="solution">
+                    <h4>Solution Python :</h4>
+                    <div class="code-container">
+                        <div class="code-header">
+                            <span class="language-tag">Python</span>
+                            <button class="copy-btn">Copier</button>
+                        </div>
+                        <pre><code><span class="code-keyword">def</span> <span class="code-function">recherche_dichotomique</span>(tableau, valeur):
+    <span class="code-comment">"""Recherche dichotomique dans un tableau trié"""</span>
+    gauche = <span class="code-number">0</span>
+    droite = <span class="code-function">len</span>(tableau) - <span class="code-number">1</span>
+    
+    <span class="code-keyword">while</span> gauche <= droite:
+        milieu = (gauche + droite) // <span class="code-number">2</span>
+        
+        <span class="code-keyword">if</span> tableau[milieu] == valeur:
+            <span class="code-keyword">return</span> milieu  <span class="code-comment"># Élément trouvé</span>
+        <span class="code-keyword">elif</span> tableau[milieu] < valeur:
+            gauche = milieu + <span class="code-number">1</span>  <span class="code-comment"># Recherche dans la moitié droite</span>
+        <span class="code-keyword">else</span>:
+            droite = milieu - <span class="code-number">1</span>  <span class="code-comment"># Recherche dans la moitié gauche</span>
+    
+    <span class="code-keyword">return</span> -<span class="code-number">1</span>  <span class="code-comment"># Élément non trouvé</span>
+
+<span class="code-comment"># Test de l'algorithme</span>
+T_trie = [<span class="code-number">1</span>, <span class="code-number">3</span>, <span class="code-number">5</span>, <span class="code-number">7</span>, <span class="code-number">9</span>, <span class="code-number">11</span>, <span class="code-number">13</span>]
+valeur = <span class="code-function">int</span>(<span class="code-function">input</span>(<span class="code-string">"Valeur à rechercher : "</span>))
+position = <span class="code-function">recherche_dichotomique</span>(T_trie, valeur)
+
+<span class="code-keyword">if</span> position != -<span class="code-number">1</span>:
+    <span class="code-function">print</span>(<span class="code-string">f"{valeur} trouvé à la position {position}"</span>)
+<span class="code-keyword">else</span>:
+    <span class="code-function">print</span>(<span class="code-string">f"{valeur} non trouvé"</span>)</code></pre>
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+        
+        <!-- Annexes -->
+        <section id="annexes">
+            <h2><i class="fas fa-clipboard-list"></i> Annexes</h2>
+            
+            <h3>Lexique des Termes Importants</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Terme</th>
+                        <th>Définition</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Algorithme</strong></td>
+                        <td>Procédure step-by-step pour résoudre un problème</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Variable</strong></td>
+                        <td>Emplacement mémoire nommé pour stocker des données</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Boucle</strong></td>
+                        <td>Structure répétitive</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Condition</strong></td>
+                        <td>Structure de décision</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tableau</strong></td>
+                        <td>Collection d'éléments de même type</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fonction</strong></td>
+                        <td>Bloc de code réutilisable avec retour de valeur</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Procédure</strong></td>
+                        <td>Bloc de code réutilisable sans retour</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Récursivité</strong></td>
+                        <td>Fonction qui s'appelle elle-même</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>Conseils de Révision</h3>
+            <div class="info-box">
+                <ol>
+                    <li><strong>Comprendre avant de mémoriser</strong> : Ne pas apprendre par cœur, mais comprendre la logique</li>
+                    <li><strong>Pratiquer régulièrement</strong> : Coder tous les jours, même 30 minutes</li>
+                    <li><strong>Réviser les bases</strong> : Les structures de contrôle sont fondamentales</li>
+                    <li><strong>Travailler en groupe</strong> : Expliquer à d'autres renforce la compréhension</li>
+                    <li><strong>Utiliser des cartes mentales</strong> : Pour visualiser les concepts et leurs relations</li>
+                </ol>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Algorithmique & Programmation</h3>
+                    <p>Un cours complet pour maîtriser les bases de l'algorithmique et de la programmation en Python.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Navigation Rapide</h3>
+                    <ul class="footer-links">
+                        <li><a href="#theorie">Partie Théorique</a></li>
+                        <li><a href="#exercices-fondamentaux">Exercices Fondamentaux</a></li>
+                        <li><a href="#tableaux">Exercices Tableaux</a></li>
+                        <li><a href="#matrices">Exercices Matrices</a></li>
+                        <li><a href="#chaines">Exercices Chaînes</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Ressources Utiles</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://docs.python.org/3/" target="_blank">Documentation Python</a></li>
+                        <li><a href="https://www.w3schools.com/python/" target="_blank">Tutoriels Python</a></li>
+                        <li><a href="https://leetcode.com/" target="_blank">Exercices d'entraînement</a></li>
+                        <li><a href="https://github.com/" target="_blank">Projets Open Source</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Cours Complet d'Algorithmique et Programmation. Tous droits réservés.</p>
+                <p>Conçu pour les étudiants en informatique et les développeurs débutants.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation mobile
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileNav = document.getElementById('mobileNav');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileNav.classList.toggle('show');
+        });
+        
+        // Fermer le menu mobile en cliquant sur un lien
+        document.querySelectorAll('.mobile-nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('show');
+            });
+        });
+        
+        // Tabs pour la section théorique
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabId = tab.getAttribute('data-tab');
+                
+                // Retirer la classe active de tous les tabs
+                tabs.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+                
+                // Ajouter la classe active au tab cliqué
+                tab.classList.add('active');
+                document.getElementById(`${tabId}-content`).classList.add('active');
+            });
+        });
+        
+        // Boutons pour afficher/masquer les solutions
+        const solutionToggles = document.querySelectorAll('.solution-toggle');
+        
+        solutionToggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                const solution = toggle.nextElementSibling;
+                solution.classList.toggle('show');
+                
+                if (solution.classList.contains('show')) {
+                    toggle.textContent = 'Masquer la solution';
+                } else {
+                    toggle.textContent = 'Afficher la solution';
+                }
+            });
+        });
+        
+        // Boutons pour copier le code
+        const copyButtons = document.querySelectorAll('.copy-btn');
+        
+        copyButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const codeContainer = button.closest('.code-container');
+                const codeElement = codeContainer.querySelector('code');
+                const codeText = codeElement.textContent;
+                
+                navigator.clipboard.writeText(codeText).then(() => {
+                    const originalText = button.textContent;
+                    button.textContent = 'Copié !';
+                    button.style.backgroundColor = '#10b981';
+                    
+                    setTimeout(() => {
+                        button.textContent = originalText;
+                        button.style.backgroundColor = '';
+                    }, 2000);
+                });
+            });
+        });
+        
+        // Exécution de code Python simulé
+        function runCode(exerciseId) {
+            const inputElement = document.getElementById(`${exerciseId}-input`);
+            const outputElement = document.getElementById(`${exerciseId}-output`);
+            const code = inputElement.value;
+            
+            // Simulation simple d'exécution de code Python
+            // Dans un environnement réel, on utiliserait un compilateur/interpréteur Python côté serveur
+            try {
+                // Simuler l'exécution pour l'exercice 1
+                if (exerciseId === 'ex1') {
+                    // Extraire le prénom du code
+                    const match = code.match(/input\("Entrez votre prénom : "\)/);
+                    if (match) {
+                        outputElement.textContent = "Bonjour [VotrePrénom], bienvenue dans Python !";
+                        outputElement.style.color = "#e2e8f0";
+                    } else {
+                        outputElement.textContent = "Code exécuté. (Simulation)";
+                        outputElement.style.color = "#e2e8f0";
+                    }
+                } else {
+                    outputElement.textContent = "Code exécuté avec succès. (Simulation)\n\nPour une exécution réelle, utilisez un environnement Python.";
+                    outputElement.style.color = "#e2e8f0";
+                }
+            } catch (error) {
+                outputElement.textContent = `Erreur d'exécution : ${error.message}`;
+                outputElement.style.color = "#f87171";
+            }
+        }
+        
+        // Navigation fluide
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Mise en évidence de la syntaxe pour les exemples de code
+        function highlightCode() {
+            const codeElements = document.querySelectorAll('code');
+            
+            codeElements.forEach(codeElement => {
+                let code = codeElement.innerHTML;
+                
+                // Mots-clés Python
+                const keywords = ['def', 'class', 'return', 'if', 'elif', 'else', 'for', 'while', 'in', 'and', 'or', 'not', 'True', 'False', 'None', 'import', 'from', 'as', 'try', 'except', 'finally', 'with', 'lambda', 'yield', 'async', 'await'];
+                
+                keywords.forEach(keyword => {
+                    const regex = new RegExp(`\\b${keyword}\\b`, 'g');
+                    code = code.replace(regex, `<span class="code-keyword">${keyword}</span>`);
+                });
+                
+                // Fonctions
+                const functions = ['print', 'input', 'len', 'range', 'int', 'float', 'str', 'list', 'dict', 'tuple', 'set', 'sum', 'max', 'min', 'sorted', 'reversed', 'enumerate', 'zip', 'map', 'filter', 'isinstance', 'type', 'abs', 'round'];
+                
+                functions.forEach(func => {
+                    const regex = new RegExp(`\\b${func}\\(`, 'g');
+                    code = code.replace(regex, `<span class="code-function">${func}</span>(`);
+                });
+                
+                // Chaînes de caractères
+                code = code.replace(/(["'].*?["'])/g, '<span class="code-string">$1</span>');
+                
+                // Commentaires
+                code = code.replace(/(#.*)/g, '<span class="code-comment">$1</span>');
+                
+                // Nombres
+                code = code.replace(/\b(\d+)\b/g, '<span class="code-number">$1</span>');
+                
+                codeElement.innerHTML = code;
+            });
+        }
+        
+        // Appliquer la coloration syntaxique au chargement
+        document.addEventListener('DOMContentLoaded', highlightCode);
+        
+        // Mode sombre/clair (optionnel)
+        const themeToggle = document.createElement('button');
+        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        themeToggle.style.position = 'fixed';
+        themeToggle.style.bottom = '20px';
+        themeToggle.style.right = '20px';
+        themeToggle.style.backgroundColor = 'var(--primary)';
+        themeToggle.style.color = 'white';
+        themeToggle.style.border = 'none';
+        themeToggle.style.borderRadius = '50%';
+        themeToggle.style.width = '50px';
+        themeToggle.style.height = '50px';
+        themeToggle.style.fontSize = '1.2rem';
+        themeToggle.style.cursor = 'pointer';
+        themeToggle.style.boxShadow = '0 4px 12px rgba(0,0,0,0.2)';
+        themeToggle.style.zIndex = '1000';
+        
+        document.body.appendChild(themeToggle);
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                document.body.style.backgroundColor = '#0f172a';
+                document.body.style.color = '#e2e8f0';
+                
+                // Ajuster les couleurs des sections
+                document.querySelectorAll('section').forEach(section => {
+                    section.style.backgroundColor = '#1e293b';
+                });
+            } else {
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                document.body.style.backgroundColor = '';
+                document.body.style.color = '';
+                
+                document.querySelectorAll('section').forEach(section => {
+                    section.style.backgroundColor = '';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
